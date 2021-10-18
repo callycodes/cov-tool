@@ -1,20 +1,22 @@
-import { Metrics } from './layout/metrics';
+import { Report } from './layout/coverage';
+import { ReportDto } from './report.dto';
 
-export function parseMetrics(attrs): Metrics {
-  const {
-    statements,
-    coveredstatements,
-    conditionals,
-    coveredconditionals,
-    methods,
-    coveredmethods,
-  } = attrs;
-  return {
-    statements: Number.parseInt(statements) || 0,
-    coveredstatements: Number.parseInt(coveredstatements) || 0,
-    conditionals: Number.parseInt(conditionals) || 0,
-    coveredconditionals: Number.parseInt(coveredconditionals) || 0,
-    methods: Number.parseInt(methods) || 0,
-    coveredmethods: Number.parseInt(coveredmethods) || 0,
+export async function parseReport(json: ReportDto): Promise<Report | null> {
+  const parsed: any = await JSON.parse('');
+  try {
+    const report: Report = await formatReport(parsed);
+    return report;
+  } catch {
+    return null;
+  }
+}
+
+export function formatReport(parsed: any): Report {
+  const report: Report = {
+    files: [],
   };
+  parsed.forEach((file) => {
+    report.files.push(file);
+  });
+  return report;
 }
