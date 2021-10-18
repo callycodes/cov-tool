@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post, Render, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Response } from 'express';
 import { ReportDto } from './report.dto';
 
 @Controller()
@@ -8,11 +7,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Render('index')
-  getHello(@Res() res: Response) {
-    return res.render('index', {
-      message: 'Hello world!',
-    });
+  getHello(): string {
+    return this.appService.getHello();
   }
 
   @Post()
