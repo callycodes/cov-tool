@@ -24,8 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-  
-  "test:cov": "jest --coverage",
+
       # Generate code coverage report
       - name: Generate code coverage report
         run: npm run test:cov
